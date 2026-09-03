@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #071617;
+  --color-tertiary: #f7f6ff;
+  --color-surface-deep: #070b14;
+  --color-primary-container: #00f2ff;
+  --color-on-secondary: #3c0091;
+  --color-surface-container-highest: #293738;
+  --color-on-primary-fixed-variant: #004f54;
+  --color-surface-container-high: #1e2c2e;
+  --color-outline: #849495;
+  --color-inverse-primary: #00696f;
+  --color-surface-variant: #293738;
+  --color-on-tertiary: #293041;
+  --color-primary-fixed: #74f5ff;
+  --color-primary-fixed-dim: #00dbe7;
+  --color-inverse-on-surface: #243334;
+  --color-on-primary-fixed: #002022;
+  --color-border-low-alpha: rgba(255, 255, 255, 0.08);
+  --color-surface-container: #132223;
+  --color-surface-tint: #00dbe7;
+  --color-outline-variant: #3a494b;
+  --color-on-tertiary-fixed: #141b2c;
+  --color-tertiary-fixed-dim: #c0c6dc;
+  --color-surface-container-lowest: #031011;
+  --color-error: #ffb4ab;
+  --color-on-primary: #00363a;
+  --color-on-surface-variant: #b9cacb;
+  --color-on-tertiary-fixed-variant: #404659;
+  --color-on-surface: #d5e6e7;
+  --color-error-container: #93000a;
+  --color-tertiary-fixed: #dce2f9;
+  --color-secondary-fixed: #e9ddff;
+  --color-on-error: #690005;
+  --color-surface-dim: #071617;
+  --color-surface-glass: rgba(14, 21, 37, 0.7);
+  --color-on-secondary-container: #c4abff;
+  --color-background: #071617;
+  --color-on-tertiary-container: #585f72;
+  --color-secondary-fixed-dim: #d0bcff;
+  --color-on-primary-container: #006a71;
+  --color-inverse-surface: #d5e6e7;
+  --color-secondary: #d0bcff;
+  --color-primary: #e1fdff;
+  --color-tertiary-container: #d4daf1;
+  --color-surface-bright: #2d3c3d;
+  --color-on-secondary-fixed: #23005c;
+  --color-on-secondary-fixed-variant: #5516be;
+  --color-on-error-container: #ffdad6;
+  --color-secondary-container: #571bc1;
+  --color-surface-container-low: #0f1e1f;
+  --color-on-background: #d5e6e7;
+  --color-cyan-accent: #00f2ff;
+  --color-purple-accent: #8b5cf6;
+  --color-card-bg: #0e1525;
+}
+
+@layer base {
+  html {
+    background: #070b14;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: #070b14;
+    color: #d5e6e7;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button, input, select, textarea {
+    font: inherit;
+  }
+
+  ::selection {
+    background: rgba(0, 242, 255, 0.3);
+    color: white;
+  }
+}
+
+@layer components {
+  .shell {
+    width: min(90vw, 1600px);
+    margin-inline: auto;
+  }
+
+  .glass {
+    background: rgba(14, 21, 37, 0.72);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .gradient {
+    background: linear-gradient(135deg, var(--color-cyan-accent), var(--color-purple-accent));
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--color-cyan-accent), var(--color-purple-accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .card {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #0e1525;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .poster {
+    transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+  }
+  .poster:hover {
+    transform: scale(1.045);
+    border-color: rgba(255, 255, 255, 0.32);
+    box-shadow: 0 0 22px rgba(0, 242, 255, 0.16);
+    z-index: 2;
+  }
+
+  .vignette {
+    background:
+      linear-gradient(90deg, #070b14 1%, rgba(7, 11, 20, 0.7) 34%, rgba(7, 11, 20, 0.08) 70%),
+      linear-gradient(0deg, #070b14 0%, transparent 58%);
+  }
+
+  .top-number {
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.48);
+    color: transparent;
+    font-size: 7rem;
+    font-weight: 800;
+    line-height: 0.75;
+  }
+
+  .ambient-glow:hover {
+    box-shadow: 0 0 20px 0 rgba(0, 242, 255, 0.15);
+  }
+
+  .shimmer {
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+  }
+
+  .details-vignette {
+    background:
+      linear-gradient(to top, #070b14 0%, #070b14 20%, rgba(7, 11, 20, 0.8) 50%, transparent 100%),
+      linear-gradient(to right, #070b14 0%, rgba(7, 11, 20, 0.8) 30%, transparent 60%);
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 242, 255, 0.3) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(0, 242, 255, 0.3);
+    border-radius: 3px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 242, 255, 0.5);
+  }
+}
+
+@media (max-width: 767px) {
+  .shell {
+    width: calc(100% - 2rem);
+  }
+  body {
+    padding-bottom: 5rem;
+  }
+  .top-number {
+    font-size: 5rem;
+  }
+}
