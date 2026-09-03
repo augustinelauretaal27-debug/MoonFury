@@ -39,7 +39,7 @@ function applyFilters(
 }
 
 function localSearch(q: string, typeFilter: FilterType, filters: SearchFilters): Content[] {
-  let list = applyFilters([...local], typeFilter, filters);
+  const list = applyFilters([...local], typeFilter, filters);
   if (q.length === 0) return list;
   const lq = q.toLowerCase();
   return list.filter((c) =>

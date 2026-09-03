@@ -27,7 +27,7 @@ function RemovableCard({ item, onRemove }: { item: Content; onRemove: () => void
 }
 
 export default function MyListPage() {
-  const { entries, ids, hydrated, remove } = useWatchlist();
+  const { entries, hydrated, remove } = useWatchlist();
   const [mounted, setMounted] = useState(false);
   const [tab, setTab] = useState<Tab>("All");
 
@@ -65,7 +65,7 @@ export default function MyListPage() {
               My List
             </h1>
             <p className="mt-2 text-sm text-slate-400">
-              Everything you've saved to watch later. Stored locally.
+              Everything you&apos;ve saved to watch later. Stored locally.
             </p>
           </div>
           {mounted && hydrated && saved.length > 0 ? (
@@ -161,7 +161,7 @@ export default function MyListPage() {
                     <div>
                       <h3 className="text-lg font-bold text-white">Resume where you left off</h3>
                       <p className="mt-1 text-sm text-slate-400">
-                        Continue watching anything you've already started.
+                        Continue watching anything you&apos;ve already started.
                       </p>
                     </div>
                   </div>

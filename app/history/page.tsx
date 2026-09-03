@@ -40,7 +40,7 @@ export default function HistoryPage() {
               Watch History
             </h1>
             <p className="mt-2 text-sm text-slate-400">
-              Everything you've watched on MoonFury. Stored only in your browser.
+              Everything you&apos;ve watched on MoonFury. Stored only in your browser.
             </p>
           </div>
           {mounted && hydrated && entries.length > 0 ? (
@@ -125,7 +125,7 @@ export default function HistoryPage() {
               </h3>
               <p className="mt-1.5 text-sm leading-6 text-slate-400">
                 MoonFury never leaves your device. Watch history, progress, and
-                preferences are saved in your browser's local storage and are never
+                preferences are saved in your browser&apos;s local storage and are never
                 sent to a server.
               </p>
               <Link
