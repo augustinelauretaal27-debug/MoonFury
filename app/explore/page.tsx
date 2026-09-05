@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { SlidersHorizontal, X, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { MovieCard } from "@/components/MovieCard";
@@ -58,7 +58,7 @@ function Pagination({ page, totalPages, onChange, loading }: {
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
-export default function ExplorePage() {
+function ExploreContent() {
   const sp = useSearchParams();
 
   const [type, setType]         = useState(sp.get("type") ?? "all");
@@ -375,5 +375,23 @@ export default function ExplorePage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function ExplorePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen py-8">
+        <div className="shell">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+            {Array.from({ length: 18 }).map((_, i) => (
+              <div key={i} className="aspect-[2/3] animate-pulse rounded-lg bg-white/5" />
+            ))}
+          </div>
+        </div>
+      </div>
+    }>
+      <ExploreContent />
+    </Suspense>
   );
 }

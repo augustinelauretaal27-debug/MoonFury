@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect, useCallback, useRef } from "react";
+import { useState, useMemo, useEffect, useCallback, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { movies } from "@/data/movies";
 import { series } from "@/data/series";
@@ -50,7 +50,7 @@ function localSearch(q: string, typeFilter: FilterType, filters: SearchFilters):
   );
 }
 
-export default function SearchPage() {
+function SearchContent() {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") ?? "";
 
@@ -238,5 +238,23 @@ export default function SearchPage() {
         </section>
       </div>
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={
+      <div className="py-8">
+        <div className="shell">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+            {Array.from({ length: 18 }).map((_, i) => (
+              <div key={i} className="aspect-[2/3] animate-pulse rounded-lg bg-white/5" />
+            ))}
+          </div>
+        </div>
+      </div>
+    }>
+      <SearchContent />
+    </Suspense>
   );
 }
