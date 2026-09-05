@@ -50,16 +50,19 @@ export function EmbedPlayer({
   useEffect(() => {
     function onFullscreenChange() {
       const isFullscreen = Boolean(document.fullscreenElement);
+      const orientation = screen.orientation as ScreenOrientation & {
+        lock?: (orientation: string) => Promise<void>;
+      };
       if (isFullscreen) {
-        screen.orientation?.lock?.("landscape").catch(() => undefined);
+        orientation.lock?.("landscape").catch(() => undefined);
       } else {
-        screen.orientation?.unlock?.();
+        orientation.unlock?.();
       }
     }
     document.addEventListener("fullscreenchange", onFullscreenChange);
     return () => {
       document.removeEventListener("fullscreenchange", onFullscreenChange);
-      screen.orientation?.unlock?.();
+      (screen.orientation as ScreenOrientation & { lock?: (o: string) => Promise<void> }).unlock?.();
     };
   }, []);
 
