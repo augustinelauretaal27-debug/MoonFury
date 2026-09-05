@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AlertTriangle, RefreshCw } from "lucide-react";
 import { buildEmbedUrl, CINESRC_ORIGIN } from "@/lib/embed";
 
@@ -25,6 +25,7 @@ export function EmbedPlayer({
 }: Props) {
   const [iframeKey, setIframeKey] = useState(0);
   const [playerError, setPlayerError] = useState<string | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const embedUrl = useMemo(
     () =>
@@ -44,6 +45,23 @@ export function EmbedPlayer({
   useEffect(() => {
     setPlayerError(null);
   }, [embedUrl]);
+
+  // Lock to landscape when fullscreen on mobile, unlock on exit
+  useEffect(() => {
+    function onFullscreenChange() {
+      const isFullscreen = Boolean(document.fullscreenElement);
+      if (isFullscreen) {
+        screen.orientation?.lock?.("landscape").catch(() => undefined);
+      } else {
+        screen.orientation?.unlock?.();
+      }
+    }
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+    return () => {
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
+      screen.orientation?.unlock?.();
+    };
+  }, []);
 
   useEffect(() => {
     function handleMessage(event: MessageEvent) {
@@ -85,7 +103,7 @@ export function EmbedPlayer({
   }
 
   return (
-    <div className="w-full overflow-hidden rounded-xl bg-black">
+    <div ref={containerRef} className="w-full overflow-hidden rounded-xl bg-black">
       <div className="flex items-center justify-between gap-3 border-b border-white/10 bg-[#070b14] px-3 py-2">
         <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
