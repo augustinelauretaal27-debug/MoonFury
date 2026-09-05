@@ -127,10 +127,10 @@ export async function GET(
     const [movieResult, tvResult] = await Promise.all([
       type !== "tv" && movieGenreId
         ? fetchPage("movie", movieGenreId, page)
-        : Promise.resolve({ items: [] as Content[], totalPages: 0 }),
+        : Promise.resolve({ items: [] as Content[], totalPages: 0, totalResults: 0 }),
       type !== "movie" && tvGenreId
         ? fetchPage("tv", tvGenreId, page)
-        : Promise.resolve({ items: [] as Content[], totalPages: 0 }),
+        : Promise.resolve({ items: [] as Content[], totalPages: 0, totalResults: 0 }),
     ]);
 
     return NextResponse.json({

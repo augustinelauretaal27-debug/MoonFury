@@ -94,7 +94,7 @@ export function TvEpisodes({ seriesId, seasons }: Props) {
                 <div className="aspect-video">
                   {ep.still_path ? (
                     <img
-                      src={imageUrl(ep.still_path, "w300")}
+                      src={imageUrl(ep.still_path, "w342")}
                       alt={ep.name}
                       className="size-full object-cover transition duration-300 group-hover:scale-105"
                       loading="lazy"
